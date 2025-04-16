@@ -11,6 +11,7 @@ import './App.css';
 function App() {
   const [selectedCard, setSelectedCard] = useState(null);
   const [isModalOpen, setModalOpen] = useState(false);
+  const [copied, setCopied] = useState(false);
 
   const openModal = (card) => {
     setSelectedCard(card);
@@ -22,31 +23,40 @@ function App() {
     setModalOpen(false);
   };
 
+  const copyEmail = () => {
+    navigator.clipboard.writeText("saularroyo97@gmail.com");
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+
   return (
     <main className="min-h-screen bg-[#131313]">
       <div className="mx-auto max-w-7xl px-4 py-12">
         {/* Header */}
-        <header className="flex w-full items-center justify-between mb-[126px]">
-  <div className="flex items-center gap-2">
-    <div className="w-[59.72px] h-[59.72px] bg-[#ffb800] rounded-full flex items-center justify-center">
-      <img
-        src="/logo_01.png"
-        alt="Saul Arroyo Logo"
-        className="w-[42px] h-[34px] object-contain"
-      />
-    </div>
-    <h1 className="font-['Inter',Helvetica] font-normal text-white text-2xl">
-      Saul Arroyo
-    </h1>
-  </div>
+ <header className="flex w-full items-center justify-between mb-[126px]">
+      <div className="flex items-center gap-2">
+        <div className="w-[59.72px] h-[59.72px] bg-[#ffb800] rounded-full flex items-center justify-center">
+          <img
+            src="/logo_01.png"
+            alt="Saul Arroyo Logo"
+            className="w-[42px] h-[34px] object-contain"
+          />
+        </div>
+        <h1 className="font-['Inter',Helvetica] font-normal text-white text-2xl">
+          Saul Arroyo
+        </h1>
+      </div>
 
-  <button className="h-[43px] px-3 py-2.5 bg-[#424c51cc] text-white rounded-[30px] backdrop-blur-[3px] flex items-center border-none">
-    <span className="w-2 h-2 bg-[#00eb18] rounded-full mr-3"></span>
-    <span className="font-['Inter',Helvetica] font-normal text-[17.6px]">
-      Available
-    </span>
-  </button>
-</header>
+      <button
+        onClick={copyEmail}
+        className="h-[43px] px-3 py-2.5 bg-[#424c51cc] text-white rounded-[30px] backdrop-blur-[3px] flex items-center border-none hover:bg-[#535f66cc] transition-all duration-200"
+      >
+        <span className="w-2 h-2 bg-[#00eb18] rounded-full mr-3"></span>
+        <span className="font-['Inter',Helvetica] font-normal text-[17.6px] mr-2">
+          {copied ? "¡Correo copiado!" : "Disponible"}
+        </span>
+      </button>
+    </header>
 
 
         {/* Hero */}
