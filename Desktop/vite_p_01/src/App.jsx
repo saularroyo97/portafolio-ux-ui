@@ -5,6 +5,7 @@ import { navigationCards } from './data/navigationCards';
 import aboutData from './data/aboutData';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import AccordionExperience from "./components/AccordionExperience";
+import SocialMedia from './components/SocialMedia';
 import './App.css';
 
 function App() {
@@ -22,59 +23,78 @@ function App() {
   };
 
   return (
-    <main className="min-h-screen bg-white">
+    <main className="min-h-screen bg-[#131313]">
       <div className="mx-auto max-w-7xl px-4 py-12">
         {/* Header */}
-        <header className="mb-20 flex items-center justify-center gap-4">
-          <img
-            className="w-[40px] h-[40px] transition-transform duration-300 hover:scale-110"
-            src="/logo_01.png"
-            alt="Logo personal"
-          />
-          <h1 className="text-3xl font-light text-neutral-900 tracking-tight">
-            Saul Arroyo
-          </h1>
-        </header>
+        <header className="flex w-full items-center justify-between mb-[126px]">
+  <div className="flex items-center gap-2">
+    <div className="w-[59.72px] h-[59.72px] bg-[#ffb800] rounded-full flex items-center justify-center">
+      <img
+        src="/logo_01.png"
+        alt="Saul Arroyo Logo"
+        className="w-[42px] h-[34px] object-contain"
+      />
+    </div>
+    <h1 className="font-['Inter',Helvetica] font-normal text-white text-2xl">
+      Saul Arroyo
+    </h1>
+  </div>
+
+  <button className="h-[43px] px-3 py-2.5 bg-[#424c51cc] text-white rounded-[30px] backdrop-blur-[3px] flex items-center border-none">
+    <span className="w-2 h-2 bg-[#00eb18] rounded-full mr-3"></span>
+    <span className="font-['Inter',Helvetica] font-normal text-[17.6px]">
+      Available
+    </span>
+  </button>
+</header>
+
 
         {/* Hero */}
         <section className="text-center mb-16">
-          <h2 className="mx-auto max-w-3xl text-4xl font-medium leading-[1.15] tracking-tight text-neutral-900 md:text-5xl">
-          Señior UI/UX Designer & Front-End Specialist
-            <span className="block mt-4 text-2xl font-normal text-neutral-600">
-            | 6+ años de experiencia en diseño de interfaces, aplicaciones web y móviles, especializado en UX/UI y front-end maquetador en React.
-            </span>
-          </h2>
+        <div className="flex flex-col md:flex-row items-center justify-between gap-10 md:gap-[222px] p-4 w-full text-center md:text-left">
+  <h2 className="font-['Roboto',Helvetica] font-bold text-4xl sm:text-5xl md:text-6xl lg:text-7xl tracking-tight leading-tight">
+    <span className="text-white">I'm Saúl — </span>
+    <span className="text-[#ffb800]">UX/UI Designer <br className="hidden md:block" /></span>
+    <span className="text-white">& Front-End Specialist</span>
+  </h2>
+
+  <img
+    className="w-8 h-8 md:w-[39.13px] md:h-[42.13px]"
+    alt="Down arrow"
+    src="/vector.svg"
+  />
+</div>
         </section>
 
         {/* Cards */}
-        <nav  className="flex gap-[1rem] justify-center flex-wrap p-[1rem]">
+        <nav className="flex gap-[1rem] justify-center flex-wrap p-[1rem]">
   {navigationCards.map((card) => (
     <Card
       key={card.id}
-      onClick={() => openModal(card)} // Asegúrate de que openModal esté definido
-      className="w-[280px] h-[280px] bg-[#f7f7f7] rounded-[20px] border-2 border-[#f1f1f1] overflow-hidden transition-all duration-300 hover:shadow-lg hover:border-transparent cursor-pointer"
+      onClick={() => openModal(card)}
+      className="w-[280px] h-[280px] bg-[#1f1f1f] rounded-[20px] border-none overflow-hidden transition-all duration-300 hover:shadow-lg hover:border-transparent cursor-pointer custom-card"
     >
       <CardContent className="p-0 h-full">
-        <div className="relative h-full flex flex-col items-center group">
-          {/* Mejor manejo de imágenes condicionales */}
+        <div className="relative h-full flex flex-col items-center justify-between group pb-4"> {/* Added justify-between y pb-4 */}
           {card.backgroundImage && (
             <div
-              className="w-[190px] h-[190px] mt-8 bg-cover bg-center transition-transform duration-500 group-hover:scale-110"
+              className="w-[160px] h-[160px] mt-6 bg-cover bg-center transition-transform duration-500 group-hover:scale-110" // Reduced size and margin
               style={{ backgroundImage: `url(${card.backgroundImage})` }}
             />
           )}
           
-          {card.logo && ( // Si usas una propiedad "logo" en tu objeto
+          {card.logo && (
             <img
-              className="w-[190px] h-[190px] mt-12 transition-opacity duration-300 hover:opacity-80"
-              alt={card.title || "Logo"} // Mejor accesibilidad
+              className="w-[160px] h-[160px] mt-6 object-contain transition-opacity duration-300 hover:opacity-80" // Reduced size and margin
+              alt={card.title || "Logo"}
               src={card.logo}
             />
           )}
           
-          <p className="absolute bottom-10 font-medium text-[#222222] text-lg tracking-tight">
+          <p className="font-medium text-[#fff] text-2xl tracking-tight px-4 text-center"> {/* Removed absolute positioning */}
             {card.title}
           </p>
+         
         </div>
       </CardContent>
     </Card>
@@ -126,22 +146,6 @@ function App() {
     </div>
   )}
 
-  {/* Modal para contacto */}
-  {selectedCard?.content?.type === 'contact' && (
-    <div className="p-6 text-center">
-     {/* Header fijo */}
-     <div className="sticky top-0 z-10 bg-white p-4 border-b border-neutral-200 rounded-t-2xl flex justify-end">
-        <button
-          onClick={closeModal}
-          className="px-4 py-2 bg-neutral-900 text-white rounded-full hover:bg-neutral-700 transition"
-        >
-          X Cerrar
-        </button>
-      </div>
-      <h2 className="text-2xl font-bold">{selectedCard.title}</h2>
-      <p className="text-neutral-600 mt-2">{selectedCard.content.text}</p>
-    </div>
-  )}
 
   {/* Modal para experiencia con accordion */}
   {selectedCard?.content?.type === 'accordion' && (
@@ -217,12 +221,11 @@ function App() {
 
      
         {/* Botón de contacto */}
-        <div className="flex justify-center mt-16">
-          <button className="px-8 py-4 bg-neutral-900 text-white rounded-full text-sm font-medium tracking-wide hover:bg-neutral-800 transition-all duration-300 transform hover:scale-[1.02]">
-          Email
-            <span className="ml-2">→</span>
-          </button>
-        </div>
+        <div className="flex flex-col items-center justify-center mt-4">
+  <div className="flex justify-center mt-16">
+    <SocialMedia className="custom_social-media" />
+  </div>
+</div>
       </div>
     </main>
   );

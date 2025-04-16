@@ -60,16 +60,6 @@ export const navigationCards = [
     type: "about", 
   },
     },
-    {
-      id: 4,
-      title: "Contacto",
-      backgroundImage: "/65e9b4140e2b223eb5ff792f-plans-20thumbnail-p-500-png.png",
-      hasImage: true,
-      hasLogo: false,
-      content: {
-        type: "contact",
-        text: "Contáctame en hola@saularroyo.com o en LinkedIn.",
-      },
-    },
+    
   ];
   
