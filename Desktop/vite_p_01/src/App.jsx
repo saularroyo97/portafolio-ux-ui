@@ -114,30 +114,46 @@ function App() {
         <Modal isOpen={isModalOpen} onClose={closeModal}>
   {/* Modal para proyectos */}
   {selectedCard?.content?.type === 'projects' && (
-    <div className="p-6 space-y-4">
-     {/* Header fijo */}
-     <div className="sticky top-0 z-10 bg-white p-4 border-b border-neutral-200 rounded-t-2xl flex justify-end">
-        <button
-          onClick={closeModal}
-          className="px-4 py-2 bg-neutral-900 text-white rounded-full hover:bg-neutral-700 transition"
-        >
-          X Cerrar
-        </button>
+  <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-4">
+    <div className="bg-white w-full max-w-3xl max-h-[90vh] rounded-2xl shadow-xl flex flex-col"> {/* Añade estas clases */}
+
+      {/* Header fijo (igual que en about) */}
+<div className="sticky top-0 z-10 bg-white p-4 border-b border-neutral-200 rounded-t-2xl flex justify-between items-center">
+  <h2 className="text-2xl font-bold text-neutral-900 mr-4">{selectedCard.title}</h2>
+  <button
+    onClick={closeModal}
+    className="px-4 py-2 bg-neutral-900 text-white rounded-full hover:bg-neutral-700 transition shrink-0"
+  >
+    X Cerrar
+  </button>
+</div>
+
+      {/* Contenido desplazable (envolver todo aquí) */}
+      <div className="overflow-y-auto p-6 space-y-4"> {/* Añade overflow-y-auto */}
+
+      
+
+        {selectedCard.content.projects.map((project, idx) => (
+          <div key={idx} className="border-b pb-4">
+              <div className='flex justify-between items-center mb-4' >
+           <h3 className="text-lg font-semibold text-neutral-900">{project.name}</h3> {/* Añade color */}
+           <span className='w-[135px] h-[35px] px-2 py-px bg-neutral-50 rounded-lg outline outline-1 outline-offset-[-1px] outline-[#d9d9d9] flex justify-center items-center gap-[3px] overflow-hidde' >{project.fecha}</span>
+           </div>
+            <img
+              src={project.image}
+              alt={project.name}
+              className="w-full h-auto object-cover rounded-lg mb-4" // Mantén igual que en about
+            />
+            <p className="text-sm text-neutral-600 leading-relaxed">{project.description}</p> {/* Añade leading-relaxed */}
+            <p className="text-sm text-neutral-600 leading-relaxed">{project.role}</p> {/* Añade leading-relaxed */}
+          </div>
+        ))}
+
       </div>
-      <h2 className="text-2xl font-bold">{selectedCard.title}</h2>
-      {selectedCard.content.projects.map((project, idx) => (
-        <div key={idx} className="border-b pb-4">
-          <img
-            src={project.image}
-            alt={project.name}
-            className="w-full h-auto object-cover rounded-lg mb-2"
-          />
-          <h3 className="text-lg font-semibold">{project.name}</h3>
-          <p className="text-sm text-neutral-600">{project.description}</p>
-        </div>
-      ))}
+
     </div>
-  )}
+  </div>
+)}
 
   {/* Modal para texto simple */}
   {selectedCard?.content?.type === 'text' && (
@@ -161,28 +177,30 @@ function App() {
   {selectedCard?.content?.type === 'accordion' && (
   <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-4">
     <div className="bg-white w-full max-w-3xl max-h-[90vh] rounded-2xl shadow-xl flex flex-col">
-
-      {/* Header fijo */}
-      <div className="sticky top-0 z-10 bg-white p-4 border-b border-neutral-200 rounded-t-2xl flex justify-between items-center gap-4">
-        <button
-          onClick={closeModal}
-          className="px-4 py-2 bg-neutral-900 text-white rounded-full hover:bg-neutral-700 transition"
-        >
-          X Cerrar
-        </button>
-        <a
-          href="/tu-cv.pdf"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="px-4 py-2 bg-neutral-900 text-white rounded-full hover:bg-neutral-700 transition"
-        >
-          CV
-        </a>
+      
+      {/* Header fijo - Versión mejorada */}
+      <div className="sticky top-0 z-10 bg-white p-4 border-b border-neutral-200 rounded-t-2xl flex justify-between items-center">
+        <h2 className="text-2xl font-bold text-neutral-900 mr-4">{selectedCard.title}</h2>
+        <div className="flex gap-2">
+          <a
+            href="/Saul_Arroyo_Pozos-UX_UI_Resume_2025.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="px-4 py-2 bg-neutral-900 text-white rounded-full hover:bg-neutral-700 transition flex items-center"
+          >
+            Ver CV
+          </a>
+          <button
+            onClick={closeModal}
+            className="px-4 py-2 bg-neutral-900 text-white rounded-full hover:bg-neutral-700 transition"
+          >
+            X Cerrar
+          </button>
+        </div>
       </div>
 
-      {/* Contenido desplazable */}
-      <div className="overflow-y-auto p-6 space-y-6">
-        <h2 className="text-2xl font-bold">{selectedCard.title}</h2>
+      {/* Contenido desplazable - Mismo estilo que about */}
+      <div className="overflow-y-auto p-6">
         <AccordionExperience />
       </div>
 
@@ -190,39 +208,51 @@ function App() {
   </div>
 )}
 
-  {/* Modal para "About" */}
-  {selectedCard?.content?.type === 'about' && (
+  {/* Modal para "Sobre mí" */}
+{selectedCard?.content?.type === 'about' && (
   <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-4">
-    <div className="bg-white w-full max-w-3xl max-h-[90vh] rounded-2xl shadow-xl flex flex-col">
-
-      {/* Header fijo */}
-      <div className="sticky top-0 z-10 bg-white p-4 border-b border-neutral-200 rounded-t-2xl flex justify-end">
-        <button
-          onClick={closeModal}
-          className="px-4 py-2 bg-neutral-900 text-white rounded-full hover:bg-neutral-700 transition"
-        >
-          X Cerrar
+    <div className="bg-white w-full max-w-5xl max-h-[90vh] rounded-2xl shadow-xl flex flex-col">
+      
+      {/* Header */}
+      <div className="sticky top-0 z-10 bg-white p-4 border-b border-neutral-200 rounded-t-2xl flex justify-between items-center">
+        <h2 className="text-2xl font-bold text-neutral-900">Sobre Mí</h2>
+        <button onClick={closeModal} className="p-2 hover:bg-neutral-100 rounded-full">
+          ✕
         </button>
       </div>
 
-      {/* Contenido desplazable */}
-      <div className="overflow-y-auto p-6 space-y-6 text-center">
-        <h2 className="text-2xl font-bold text-neutral-900">{aboutData.title}</h2>
+      {/* Contenido con scroll */}
+      <div className="overflow-y-auto p-6 space-y-16">  {/* Aumenté el espacio vertical */}
+        {aboutData.map((section, index) => (
+          <div key={index} className="flex flex-col md:flex-row gap-8 items-start">
+            
+            {/* Columna izquierda (Imagen) */}
+            <div className="md:w-5/12 w-full">
+              <img
+                src={section.image}
+                alt={section.title}
+                className="w-full h-auto object-cover rounded-xl "
+              />
+            </div>
 
-        <img
-          src={aboutData.image}
-          alt="Sobre mí"
-          className="w-4/5 mx-auto h-auto object-cover rounded-lg"
-        />
-
-        <p className="text-neutral-700 leading-relaxed text-base">
-          {aboutData.text}
-        </p>
+            {/* Columna derecha (Contenido) */}
+            <div className="md:w-7/12 w-full space-y-6">  {/* Más espacio entre elementos */}
+              <h3 className="text-2xl font-bold flex items-center gap-2">
+                <span className="text-3xl">{section.title.split(' ')[0]}</span>
+                {section.title.replace(section.title.split(' ')[0], '')}
+              </h3>
+              
+              <p className="text-neutral-600 leading-relaxed whitespace-pre-line">
+                {section.text}
+              </p>
+            </div>
+          </div>
+        ))}
       </div>
-
     </div>
   </div>
 )}
+
 
 
 

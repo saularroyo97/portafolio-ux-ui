@@ -27,3 +27,35 @@
     outline: 1px solid #ffb800;
     outline-offset: -1px;
   }
+  /* En tu app.css */
+/* ============== Override Accordion ============== */
+.accordion {
+  --bs-accordion-border-color: #e5e7eb; /* Color del borde */
+  --bs-accordion-border-width: 1px; /* Grosor del borde */
+  --bs-accordion-btn-focus-box-shadow: none; /* Elimina el glow al enfocar */
+}
+
+/* Botones cerrados */
+.accordion-button {
+  background-color: white !important;
+  color: #1f2937 !important; /* Color de texto gris oscuro */
+  font-weight: 500;
+}
+
+/* Botones abiertos (collapsed) */
+.accordion-button:not(.collapsed) {
+  background-color: white !important;
+  color: #1f2937 !important;
+  box-shadow: none !important; /* Elimina la sombra inferior */
+}
+
+/* Flecha del acordeón */
+.accordion-button::after {
+  filter: brightness(0) saturate(100%); /* Cambia flecha a negro */
+}
+
+/* Contenido del acordeón */
+.accordion-body {
+  border-top: 1px solid #e5e7eb !important; /* Borde superior sutil */
+  color: #4b5563 !important; /* Texto gris medio */
+}
