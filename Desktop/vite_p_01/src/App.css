@@ -1,61 +1,171 @@
+/* App.css */
+:root {
+  --main-font: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+    Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  --orange-primary: #ff6b18;
+  --orange-hover: #e55a0e;
+  --bs-primary: var(--orange-primary); /* Sobrescribe Bootstrap primary color */
+  --bs-body-font-family: var(--main-font); /* Usa tu fuente en todo Bootstrap */
+}
 
-.custom-card {
-    border: none !important;
-    transition: all 0.3s ease-in-out;
-    cursor: pointer;
-    overflow: hidden;
-    border-radius: 20px;
+/* Sobrescribe estilos de Bootstrap */
+.nav-header {
+  background-color: white !important;
+  border-radius: 10px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 1rem 2rem;
+}
+
+.navbar-brand {
+  color: black !important;
+  font-size: 1.5rem !important;
+  font-weight: 700 !important;
+}
+
+.nav-link {
+  color: black !important;
+  font-size: 1rem !important;
+  transition: color 0.3s ease !important;
+}
+
+.nav-link:hover {
+  color: var(--orange-primary) !important;
+}
+
+.cv-button {
+  background: var(--orange-primary) !important;
+  border-radius: 56.73px !important;
+  padding: 0.75rem 1.5rem !important;
+  border: none !important;
+  transition: background 0.3s ease !important;
+}
+
+.cv-button:hover {
+  background: var(--orange-hover) !important;
+}
+
+/* Header Section */
+.header-section{
+  min-height: 500px;
+  display: flex;
+  align-items: center;
+}
+.header-section h1 {
+  font-size: 2.5rem;
+  line-height: 1.3;
+
+}
+
+/* Project Card */
+.project-card {
+  border: none !important;
+  border-radius: 10px !important;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+
+.project-title {
+  font-size: 1.875rem;
+  font-weight: 600;
+  letter-spacing: -0.6px;
+  margin-bottom: 0;
+}
+
+.project-description {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #444;
+  max-width: 697px;
+}
+
+.year-badge {
+  font-family: 'Inter', sans-serif;
+  font-size: 1rem;
+  color: #686768;
+  border: 2px solid #6b606a !important;
+  background: #fdfbfd !important;
+  padding: 0.5rem 1rem !important;
+  border-radius: 11.5px !important;
+}
+
+.project-image {
+  width: 100%;
+  height: auto;
+  min-height: 300px;
+  object-fit: cover;
+  display: block;
+}
+
+.custom-accordion-header {
+  cursor: pointer !important;
+  padding: 1rem 1.5rem !important;
+  transition: all 0.3s ease !important;
+  border: 1px solid #e9ecef !important;
+  border-radius: 8px !important;
+  background: white !important;
+}
+
+/* Eliminar flecha */
+.custom-accordion-header .accordion-button::after {
+  display: none !important;
+}
+
+/* Estado hover */
+.custom-accordion-header:hover {
+  background: #f8f9fa !important;
+  transform: translateY(-2px);
+  box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+}
+
+/* Quitar padding interno del botón */
+.custom-accordion-header .accordion-button {
+  padding: 0 !important;
+  background: transparent !important;
+}
+
+/* Quitar borde focus */
+.custom-accordion-header .accordion-button:focus {
+  box-shadow: none !important;
+}
+
+/* Estado abierto */
+.accordion-item.open .custom-accordion-header {
+  border-bottom-left-radius: 0 !important;
+  border-bottom-right-radius: 0 !important;
+  border-bottom: 2px solid #007bff !important;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .header-section h1 {
+    font-size: 1.8rem;
   }
   
-
-  .custom-card:hover {
-    background: linear-gradient(to left, rgba(19, 19, 19, 0.1), rgba(255, 184, 0, 0.1));
-    outline: 1px solid #ffb800;
-    outline-offset: -1px;
+  .project-image {
+    min-height: 300px;
   }
 
+  .navbar-collapse {
+    padding-top: 1rem;
+  }
   
-  .custom_social-media{
-    border: none !important;
-    transition: all 0.3s ease-in-out;
-    cursor: pointer;
-    overflow: hidden;
-    border-radius: 20px;
+  .cv-button {
+    margin-top: 1rem;
+    width: 100%;
   }
-  .custom_social-media:hover {
-    background: linear-gradient(to left, rgba(19, 19, 19, 0.1), rgba(255, 184, 0, 0.1));
-    outline: 1px solid #ffb800;
-    outline-offset: -1px;
+}
+
+@media (max-width: 576px) {
+  .nav-header {
+    padding: 1rem;
   }
-  /* En tu app.css */
-/* ============== Override Accordion ============== */
-.accordion {
-  --bs-accordion-border-color: #e5e7eb; /* Color del borde */
-  --bs-accordion-border-width: 1px; /* Grosor del borde */
-  --bs-accordion-btn-focus-box-shadow: none; /* Elimina el glow al enfocar */
-}
-
-/* Botones cerrados */
-.accordion-button {
-  background-color: white !important;
-  color: #1f2937 !important; /* Color de texto gris oscuro */
-  font-weight: 500;
-}
-
-/* Botones abiertos (collapsed) */
-.accordion-button:not(.collapsed) {
-  background-color: white !important;
-  color: #1f2937 !important;
-  box-shadow: none !important; /* Elimina la sombra inferior */
-}
-
-/* Flecha del acordeón */
-.accordion-button::after {
-  filter: brightness(0) saturate(100%); /* Cambia flecha a negro */
-}
-
-/* Contenido del acordeón */
-.accordion-body {
-  border-top: 1px solid #e5e7eb !important; /* Borde superior sutil */
-  color: #4b5563 !important; /* Texto gris medio */
+  
+  .project-title {
+    font-size: 1.5rem;
+  }
+  
+  .project-description {
+    font-size: 0.9rem;
+  }
 }
